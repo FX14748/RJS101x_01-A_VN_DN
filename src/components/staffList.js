@@ -7,13 +7,18 @@ class StaffList extends Component {
         super(props);
         this.state = { selectedStaff : null }
     };
+    onstaffSelect(staff) {
+        this.setState({ selectedstaff: staff});
+    }
 
     render() {
         const staffsList = this.props.staffs.map((staff) => {
             return (
                 <div className="col-md-5 col-xl-4">
                     <Card key={staff.id}>
-                        <Card.Body>{staff.name}</Card.Body>
+                        <CardBody>
+                            {staff.name}
+                        </CardBody>
                     </Card> 
                 </div>
             );

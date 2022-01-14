@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import './App.css';
 import { Navbar, NavbarBrand } from 'reactstrap';
@@ -24,6 +25,9 @@ class App extends Component {
           </div>
         </Navbar>
         <StaffList  staffs = {this.state.staffs}/>
+        <div className="container">
+          <p>Bấm vào tên nhân viên để xem thông tin</p>
+        </div>
       </div>
 
     )
