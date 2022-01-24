@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
     }
 
-    function RenderComments({comments, postComment, dishId}) {
+    function RenderComments({comments, addComment, dishId}) {
         if (comments != null)
             return(
                 <div className="col-12 col-md-5 m-1">
@@ -28,12 +28,13 @@ import { Link } from 'react-router-dom';
                                         <li>
                                         <p>{comment.comment}</p>
                                         <p>{comment.rating} stars</p>
-                                        <p>-- {comment.author.firstname} {comment.author.lastname} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                                        <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                                         </li>
                                 );
                             })}
                         
                     </ul>
+                   {/* <CommentForm dishId={dishId} addComment={addComment} /> */}
                 </div>
             );
         else
@@ -60,8 +61,9 @@ import { Link } from 'react-router-dom';
                     <div className="row">
                         <RenderDish dish={props.dish} favorite={props.favorite} postFavorite={props.postFavorite} />
                         <RenderComments comments={props.comments}
-                            postComment={props.postComment}
-                            dishId={props.dish._id} />
+                            addComment={props.addComment}
+                            dishId={props.dish.id}
+                        />
                     </div>
                 </div>
             );
