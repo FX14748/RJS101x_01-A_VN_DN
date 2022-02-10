@@ -5,6 +5,7 @@ import './App.css';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import { STAFFS } from './shared/staffs';
 import StaffList from './components/staffList'
+import ViewpointCard from './components/viewButton';
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
             <NavbarBrand href="/">Ứng dụng quản lý nhân sự v1.0</NavbarBrand>
           </div>
         </Navbar>
+        <ViewpointCard/>
         <StaffList  staffs = {this.state.staffs}/>
       </div>
 
