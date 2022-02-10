@@ -4,9 +4,10 @@ import { Button } from 'reactstrap';
 class ViewpointCard extends Component {
     constructor(props) {
         super(props);
-        this.state = { selectedView : null }
+        this.state = { selectedView: "\"col-md-5 col-xl-4\""
     };
-    
+}
+  /*  
     render() {     
         return (
             <div className='row'>
@@ -41,6 +42,13 @@ class ViewpointCard extends Component {
             </div>
             </div>
         )};
+*/
 
+render() {     
+    return (
+        <div>
+            {this.state.selectedView}
+        </div>
+    )}
 }
 export default ViewpointCard;

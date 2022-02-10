@@ -7,7 +7,9 @@ import StaffDetails from './staffDetail';
 class StaffList extends Component {
     constructor(props) {
         super(props);
-        this.state = { selectedStaff : null }
+        this.state = { selectedStaff : null,
+                        viewPage: "col-md-6 col-xl-4"
+                     }
     };
     onStaffSelect(staff) {
         this.setState({ selectedStaff: staff});
@@ -37,7 +39,7 @@ class StaffList extends Component {
     render() {
         const staffsList = this.props.staffs.map((staff) => {
             return (
-                <div className="col-md-5 col-xl-4">
+                <div className= {this.state.viewPage}>
                     <Card key={staff.id}
                     onClick={() => this.onStaffSelect(staff)}>
                         <CardBody>
