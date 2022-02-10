@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import dateFormat, { masks } from "dateformat";
 import StaffDetails from './staffDetail';
+import { Button } from 'reactstrap';
+
 
 
 class StaffList extends Component {
@@ -52,6 +54,37 @@ class StaffList extends Component {
 
         return (
             <div className="container">
+                <div className='row'>
+                    <div className='col-md-4 text-center'>
+                        <Button 
+                        variant="primary"
+                        size='lg'
+                        onClick={() => this.setState({viewPage:'col-sm-4'})}        
+                        >
+                            Hiển thị 3 cột
+                        </Button>
+                    </div>
+                    
+                    <div className='col-md-4 text-center'>
+                        <Button 
+                        variant="primary"
+                        size='lg'     
+                        onClick={() => this.setState({viewPage:'col-sm-6'})}        
+                        >
+                            Hiển thị 2 cột
+                        </Button>
+                    </div>
+
+                    <div className='col-md-4 text-center'>
+                        <Button 
+                        variant="primary"
+                        size='lg'     
+                        onClick={() => this.setState({viewPage:'col-sm-12'})}        
+                        >
+                            Hiển thị 1 cột
+                        </Button>
+                    </div>
+                </div>
                 <div className="row">
                     {staffsList}
                 </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Card, CardBody, CardText } from 'reactstrap';
 import dateFormat, { masks } from "dateformat";
 
 
