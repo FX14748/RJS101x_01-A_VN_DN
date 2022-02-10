@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import dateFormat, { masks } from "dateformat";
-import StaffDetails from './staffDetail';
 
 
-class StaffList extends Component {
+class StaffDetails extends Component {
     constructor(props) {
         super(props);
         this.state = { selectedStaff : null }
     };
-    onStaffSelect(staff) {
-        this.setState({ selectedStaff: staff});
-    }
+    
     renderStaff(staff) {
         if (staff != null)
             return(
@@ -35,30 +32,17 @@ class StaffList extends Component {
     }
 
     render() {
-        const staffsList = this.props.staffs.map((staff) => {
-            return (
-                <div className="col-md-5 col-xl-4">
-                    <Card key={staff.id}
-                    onClick={() => this.onStaffSelect(staff)}>
-                        <CardBody>
-                        {staff.name}
-                        </CardBody>
-                    </Card> 
-                </div>
-            );
-        })
-
         return (
-            <div className="container">
-                <div className="row">
-                    {staffsList}
-                </div>
-                <div className="row">
-                   <StaffDetails selectedStaff = {this.state.selectedStaff}/>
-                </div>
+            <div  className="col-12 col-md-5 m-1">
+                {this.renderStaff(this.props.selectedStaff)}
             </div>
-                )
-    };
-
+        )
+    }
 }
-export default StaffList
+
+export default StaffDetails;
+
+
+
+
+
