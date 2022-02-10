@@ -5,7 +5,6 @@ import './App.css';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import { STAFFS } from './shared/staffs';
 import StaffList from './components/staffList'
-import ViewpointCard from './components/viewButton';
 
 class App extends Component {
 

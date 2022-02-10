@@ -54,7 +54,7 @@ class StaffList extends Component {
 
         return (
             <div className="container">
-                <div className='row'>
+                <div className='row display-button'>
                     <div className='col-md-4 text-center'>
                         <Button 
                         variant="primary"
@@ -85,10 +85,10 @@ class StaffList extends Component {
                         </Button>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row staff-list">
                     {staffsList}
                 </div>
-                <div className="row">
+                <div className="row staff-info">
                    <StaffDetails selectedStaff = {this.state.selectedStaff}/>
                 </div>
             </div>
