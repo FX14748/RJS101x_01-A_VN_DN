@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardText } from 'reactstrap';
 import dateFormat, { masks } from "dateformat";
-
+import './StaffDetail.css';
 
 class StaffDetails extends Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class StaffDetails extends Component {
 
     render() {
         return (
-            <div  className="col-12 col-md-5 m-1">
+            <div  className="col-12 col-md-5 m-1 info-card">
                 {this.renderStaff(this.props.selectedStaff)}
             </div>
         )

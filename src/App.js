@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import './App.css';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import { STAFFS } from './shared/staffs';
-import StaffList from './components/staffList'
+import StaffList from './components/StaffList'
 
 class App extends Component {
 
@@ -30,10 +29,5 @@ class App extends Component {
     )
   }
 }
-
-
-
-
-
 
 export default App;

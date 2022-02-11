@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
-import dateFormat, { masks } from "dateformat";
-import StaffDetails from './staffDetail';
+import dateFormat from "dateformat";
+import StaffDetails from './StaffDetail';
 import { Button } from 'reactstrap';
-
+import './StaffList.css';
 
 
 class StaffList extends Component {
@@ -43,7 +43,9 @@ class StaffList extends Component {
             return (
                 <div className= {this.state.viewPage}>
                     <Card key={staff.id}
-                    onClick={() => this.onStaffSelect(staff)}>
+                    onClick={() => this.onStaffSelect(staff)}
+                    className="staff-card"
+                    >
                         <CardBody>
                         {staff.name}
                         </CardBody>
@@ -54,34 +56,37 @@ class StaffList extends Component {
 
         return (
             <div className="container">
-                <div className='row display-button'>
+                <div className='row'>
                     <div className='col-md-4 text-center'>
                         <Button 
-                        variant="primary"
+                        className='display-button'
+                        color="warning"
                         size='lg'
-                        onClick={() => this.setState({viewPage:'col-sm-4'})}        
+                        onClick={() => this.setState({viewPage:'col-md-6 col-xl-4'})}        
                         >
-                            Hiển thị 3 cột
+                            Hiển thị mặc định
                         </Button>
                     </div>
                     
                     <div className='col-md-4 text-center'>
                         <Button 
-                        variant="primary"
+                        className='display-button'
+                        color="warning"
                         size='lg'     
                         onClick={() => this.setState({viewPage:'col-sm-6'})}        
                         >
-                            Hiển thị 2 cột
+                            Hiển thị theo 2 cột
                         </Button>
                     </div>
 
                     <div className='col-md-4 text-center'>
                         <Button 
-                        variant="primary"
+                        className='display-button'
+                        color="warning"
                         size='lg'     
                         onClick={() => this.setState({viewPage:'col-sm-12'})}        
                         >
-                            Hiển thị 1 cột
+                            Hiển thị theo 1 cột
                         </Button>
                     </div>
                 </div>
@@ -91,6 +96,7 @@ class StaffList extends Component {
                 <div className="row staff-info">
                    <StaffDetails selectedStaff = {this.state.selectedStaff}/>
                 </div>
+                
             </div>
                 )
     };
