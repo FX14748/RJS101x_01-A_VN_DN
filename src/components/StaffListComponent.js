@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Card, CardBody, CardText } from 'reactstrap';
 import dateFormat from "dateformat";
-import StaffDetails from './StaffDetail';
+import StaffDetails from './StaffDetailComponent';
 import { Button } from 'reactstrap';
-import './StaffList.css';
+import './StaffListComponent.css';
 
 
 class StaffList extends Component {

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import { STAFFS } from './shared/staffs';
-import StaffList from './components/StaffList'
+import StaffList from './components/StaffListComponent'
 
 class App extends Component {
 

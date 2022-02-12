@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardText } from 'reactstrap';
 import dateFormat, { masks } from "dateformat";
-import './StaffDetail.css';
+import './StaffDetailComponent.css';
 
 class StaffDetails extends Component {
     constructor(props) {
