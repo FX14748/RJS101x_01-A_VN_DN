@@ -6,6 +6,8 @@ import Footer from './FooterComponent';
 import Header from './HeaderComponent';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { DEPARTMENTS, STAFFS } from '../shared/staffs';
+import DepartmentDetail from './DepartmentComponent';
+
 
 
 class Main extends Component {
@@ -15,6 +17,7 @@ class Main extends Component {
 
     this.state ={
       staffs: STAFFS,
+      departments:DEPARTMENTS
     };
   }
 
@@ -36,6 +39,7 @@ class Main extends Component {
             <Switch>
               <Route exact path="/stafflist" component={()=> <StaffList staffs ={this.state.staffs} /> }/>
               <Route path="/stafflist/:ID" component={StaffWithId}/>
+              <Route exact path="/department" component={()=> <DepartmentDetail departments ={this.state.departments} /> }/>
               <Redirect to="/home"/>
             </Switch>
           <Footer/>
