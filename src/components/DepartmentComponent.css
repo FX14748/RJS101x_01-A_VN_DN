@@ -1,0 +1,9 @@
+.text-card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    text-align: left;
+    margin-left: 10px;
+}
