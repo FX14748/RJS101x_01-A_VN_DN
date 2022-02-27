@@ -25,11 +25,11 @@ import { Link } from 'react-router-dom'
                 return(
                     <CardBody key={staff.id}>
                         <CardTitle>Họ và tên: {staff.name}</CardTitle>
-                        <CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText>
-                        <CardText>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardText>
-                        <CardText>Phòng ban: {staff.department.name}</CardText>
-                        <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
-                        <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
+                        <CardTitle>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardTitle>
+                        <CardTitle>Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}</CardTitle>                        
+                        <CardTitle>Phòng ban: {staff.department.name}</CardTitle>
+                        <CardTitle>Số ngày nghỉ còn lại: {staff.annualLeave}</CardTitle>
+                        <CardTitle>Số ngày đã làm thêm: {staff.overTime}</CardTitle>
                     </CardBody> 
                 );
             else

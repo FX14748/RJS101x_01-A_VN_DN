@@ -8,6 +8,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { DEPARTMENTS, STAFFS } from '../shared/staffs';
 import DepartmentDetail from './DepartmentComponent';
 import Salary from './SalaryComponents';
+import Search from "./SearchComponent";
 
 
 
@@ -18,9 +19,18 @@ class Main extends Component {
 
     this.state ={
       staffs: STAFFS,
-      departments:DEPARTMENTS
+      departments:DEPARTMENTS,
+      searchInput: ''
     };
   }
+
+  getTextSearch = (text) => {
+    this.setState({
+      searchInput: text
+    });
+
+    // console.log(' Dữ liệu nhân được là:' + this.state.searchText)
+}
 
   
   render () {
@@ -34,14 +44,26 @@ class Main extends Component {
         />
       )
     }
+
+    var results = [];
+    this.state.staffs.forEach((item) => {
+        if ( item.name.toLowerCase().includes(this.state.searchInput.toLowerCase())) {
+            results.push(item);
+        }
+    })
+    console.log(results);
+
       return(
         <div>
           <Header/>
+          <Search 
+                searchedStaff = {(text) => this.getTextSearch(text)}
+            />
             <Switch>
-              <Route exact path="/stafflist" component={()=> <StaffList staffs ={this.state.staffs} /> }/>
+              <Route exact path="/stafflist" component={()=> <StaffList staffs={results} /> }/>
               <Route path="/stafflist/:ID" component={StaffWithId}/>
               <Route exact path="/department" component={()=> <DepartmentDetail departments ={this.state.departments} /> }/>
-              <Route exact path="/payslip" component={()=> <Salary staffs ={this.state.staffs} /> }/>
+              <Route exact path="/payslip" component={()=> <Salary staffs={results} /> }/>
             </Switch>
           <Footer/>
         </div>

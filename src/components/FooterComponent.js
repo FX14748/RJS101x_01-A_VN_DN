@@ -3,7 +3,7 @@ import React from 'react';
 
 function Footer(props) {
     return(
-    <div className="footer">
+    <div className="footer" style={{"background-color":'rgb(7, 200, 238)'}}>
         <hr/>
         <div className="container">
             <div className="row justify-content-center">             
@@ -32,7 +32,7 @@ function Footer(props) {
             </div>
             <div className="row justify-content-center">             
                 <div className="col-auto">
-                    <p>© Copyright 2018 Ristorante Con Fusion</p>
+                    <p>© Copyright 2022 Funix asm2</p>
                 </div>
             </div>
         </div>
