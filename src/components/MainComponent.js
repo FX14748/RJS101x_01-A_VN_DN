@@ -28,8 +28,6 @@ class Main extends Component {
     this.setState({
       searchInput: text
     });
-
-    // console.log(' Dữ liệu nhân được là:' + this.state.searchText)
 }
 
   
