@@ -1,0 +1,16 @@
+Asm 2 - Report
+
+1) Introducing:
+- Sản Phẩm làm về ứng dụng nhân sự 1.0, giúp người dùng có thể xem thông tin tất cả các nhân viên đang làm việc, số lượng nhân viên từng 
+phòng ban, xem được bảng lương & tìm kiếm thông tin từng nhân viên cụ thể.
+- Các tính năng hiện có 
+    + Danh sách các nhân viên: Hiển thị các nhân viên đang làm việc tại công ty ( bảo gồm hình ảnh, tên).
+    + Thông tin nhân viên: Hiển thị thông tin cụ thể của từng nhân viên ( sau khi nhấp vào thẻ nhân viên muốn xem) - Hiển thị hình ảnh, tên,
+     ngày sinh, ngày gia nhập cty, phòng bạn, số ngày nghỉ còn lại & số ngày làm thêm.
+    +Thông tin về các phòng ban: Hiển thị số lượng nhân viên đang làm việc ở từng phòng ban.
+    +Bảng Lương: hiển thị tất cả thông tin liên quan đến thu nhập của từng nhân viên (tên, Mã nhân viên, Hệ số lương, Số giờ làm thêm, mức thu nhập trpng tháng của nhân từng nhân viên).
+    + Tìm kiếm nhân viên theo tên: truy xuất đúng nhân viên có tên trùng với giá trị được nhập vào thanh tìm kiếm & trả về thể nhân viên
+    trong danh sách, hiện thị bảng lương của chính nhân viên đó trong mục bảng lương.
+
+2) Sketch: => được input trong ./src/report/AppReport.drawio ( các tab Home, stafflist, salary, department & Staff Details)
+3) navigation structure: => được input trong ./src/report/AppReport.drawio ( tab Navigation structure)
