@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
     const StaffList = (props) => {
         const staffsList = props.staffs.map((staff) => {
             return (
-                <div key={staff.id} className= "col-md-4 col-xl-2">
+                <div key={staff.id} className= "col-6 col-sm-4 col-lg-2">
                      <RenderList staff={staff}/>
                 </div>
             );
