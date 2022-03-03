@@ -3,7 +3,7 @@ import React from 'react';
 
 function Footer(props) {
     return(
-    <div className="footer">
+    <div className="footer" style={{"background-color":'rgb(7, 200, 238)'}}>
         <hr/>
         <div className="container">
             <div className="row justify-content-center">             

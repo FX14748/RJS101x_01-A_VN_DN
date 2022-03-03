@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Card, CardBody, CardImg } from 'reactstrap';
 import './StaffListComponent.css';
 import { Link } from "react-router-dom";
@@ -19,24 +19,24 @@ import { Link } from "react-router-dom";
             </Card>
         );
     }
-
+    
     const StaffList = (props) => {
-        const staffsList = props.staffs.map((staff) => {
+        const  staffsList = props.staffs.map((staff) => {
             return (
                 <div key={staff.id} className= "col-md-4 col-xl-2">
                      <RenderList staff={staff}/>
                 </div>
             );
         })
-        return (
-            <div className="container">
-                <div><h2>Nhân Viên</h2><hr/></div>
-                <div className="row staff-list">
-                    {staffsList}
-                </div>        
-            </div>
-            
-        );
+        
+            return (
+                <div className="container">
+                    <div><h2>Nhân Viên</h2><hr/></div>
+                    <div className="row staff-list">
+                        {staffsList}
+                    </div>        
+                </div>
+             );
     }
 
 
