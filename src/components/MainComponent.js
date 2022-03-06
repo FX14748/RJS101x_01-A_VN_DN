@@ -4,37 +4,43 @@ import StaffList from './StaffListComponent';
 import StaffDetails from './StaffDetailComponent';
 import Footer from './FooterComponent';
 import Header from './HeaderComponent';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { DEPARTMENTS, STAFFS } from '../shared/staffs';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import DepartmentDetail from './DepartmentComponent';
 import Salary from './SalaryComponents';
 import Search from "./SearchComponent";
 
 
+const mapStateToProps= state => {
+  return {
+    staffs: state.staffs,
+    departments:state.departments
+  }
+}
 
 class Main extends Component {
 
   constructor(props) {
     super (props);
-
+  
     this.state ={
-      staffs: STAFFS,
-      departments:DEPARTMENTS,
       searchInput: '',
-      test:''
+      test:'',
+      staffs:this.props.staffs
     };
   }
+
 
 getTextSearch = (text) => {
     this.setState({
       searchInput: text,
     });
 
-    // console.log(' Dữ liệu nhân được là:' + this.state.searchText)
+     //console.log(' Dữ liệu nhân được là:' + this.state.searchText)
 }
 
 addNewStaff = (input) => {
-  if(input.name !=='', input.doB !=='', input.startDate !=='')
+  if(input.name !=='' & input.doB !=='' & input.startDate !=='')
     {
       const newStaff= {
         id:this.state.staffs.length,
@@ -47,17 +53,25 @@ addNewStaff = (input) => {
         overTime: input.overTime,
         image: '/assets/images/alberto.png',
       };
+      console.log(newStaff)
       this.setState({
           test: input,
           staffs: [...this.state.staffs, ...[newStaff]]
       })
-      //console.log(this.state.staffs)
+      console.log(this.state.staffs)
     }
 }
 
-  
-  render () {
 
+render () {
+  var results = [];
+  this.state.staffs.map((item) => {
+      if ( item.name.toLowerCase().includes(this.state.searchInput.toLowerCase())) {
+          results.push(item);
+      }
+  })
+  //console.log(results);
+  
     const StaffWithId = ({ match }) => {
       return (
         <StaffDetails
@@ -68,13 +82,6 @@ addNewStaff = (input) => {
       )
     }
 
-    var results = [];
-    this.state.staffs.map((item) => {
-        if ( item.name.toLowerCase().includes(this.state.searchInput.toLowerCase())) {
-            results.push(item);
-        }
-    })
-    //console.log(results);
 
       return(
         <div>
@@ -87,7 +94,7 @@ addNewStaff = (input) => {
             <Switch>
               <Route exact path="/stafflist" component={()=> <StaffList staffs={results} /> }/>
               <Route path="/stafflist/:ID" component={StaffWithId}/>
-              <Route exact path="/department" component={()=> <DepartmentDetail departments ={this.state.departments} /> }/>
+              <Route exact path="/department" component={()=> <DepartmentDetail departments ={this.props.departments} /> }/>
               <Route exact path="/payslip" component={()=> <Salary staffs={results} /> }/>
             </Switch>
           <Footer/>
@@ -98,4 +105,4 @@ addNewStaff = (input) => {
   }
 
 
-export default Main;
+export default withRouter(connect(mapStateToProps)(Main));

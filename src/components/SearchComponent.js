@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, FormFeedback, Input, Col, Modal, ModalBody, ModalHeader, Label, Row } from 'reactstrap';
+import { Control, LocalForm, Errors} from 'react-redux-form';
 
-
+const required = (value) => value && value.length > 0 ;
+const maxlength = (len) => (value) => !(value) || (value.length <= len);
+const isNumber = (value) => !(value) ||!isNaN(Number(value));
 
 class Search extends Component {
     constructor(props) {
@@ -107,10 +110,10 @@ class Search extends Component {
     ;
         // hide modal
         
-        event.preventDefault();
+        //event.preventDefault();
         
-        /*console.log(this.state.newStaff);
-        const staffData = this.state.newStaff;
+        console.log(this.state.newStaff);
+        /*const staffData = this.state.newStaff;
         const newStaff= {
             name: staffData.name,
             doB: staffData.doB,
@@ -137,7 +140,7 @@ class Search extends Component {
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                         <ModalHeader toggle={this.toggleModal}>Thêm Nhân Viên</ModalHeader>
                         <ModalBody>
-                            <Form onSubmit={this.handleSubmit}>
+                            <LocalForm onSubmit={this.handleSubmit}>
                                 <FormGroup row>
                                     <Label 
                                         htmlFor="name"
@@ -145,17 +148,27 @@ class Search extends Component {
                                             Tên
                                     </Label>
                                     <Col md={8}>
-                                        <Input 
-                                            type="text" 
+                                        <Control
+                                            type="text"
+                                            model=".name"
                                             id="name" 
                                             name="name"
-                                            
+                                            className="form-control"
                                             value={this.state.newStaff.name}
                                             valid={errors.name === ''}
                                             invalid={errors.name !== ''}
                                             onBlur={this.handleBlur('name')}
-                                            onChange={this.handleInputChange}/>
-                                        <FormFeedback>{errors.name}</FormFeedback>
+                                            onChange={this.handleInputChange}
+                                            validators={{ required, maxLength: maxlength(15) }}/>
+                                        <Errors
+                                            model=".name"
+                                            show={(field) => field.touched && !field.focus}
+                                            messages={{
+                                            required: "Yêu cầu nhập.",
+                                            maxLength: "Hãy nhập dưới 15 ký tự.",
+                                            }}
+                                            className="text-danger"
+                                        />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -165,16 +178,24 @@ class Search extends Component {
                                             Ngày Sinh
                                     </Label>
                                     <Col md={8}>
-                                        <Input 
-                                            type="date" 
+                                        <Control
+                                            type="date"
+                                            className="form-control"
+                                            model=".doB"
                                             id="doB" 
                                             name="doB"
                                             value={this.state.newStaff.doB}
-                                            valid={errors.doB === ''}
-                                            invalid={errors.doB !== ''}
                                             onBlur={this.handleBlur('doB')}
-                                            onChange={this.handleInputChange} />
-                                            <FormFeedback>{errors.doB}</FormFeedback>
+                                            onChange={this.handleInputChange}
+                                            validators={{required}} />
+                                        <Errors
+                                            model=".doB"
+                                            show={(field) => field.touched && !field.focus}
+                                            messages={{
+                                            required: "Yêu cầu nhập."
+                                            }}
+                                            className="text-danger"
+                                        />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -184,16 +205,24 @@ class Search extends Component {
                                             Ngày Vào Công Ty
                                     </Label>
                                     <Col md={8}>
-                                        <Input 
+                                        <Control 
                                             type="date" 
                                             id="startDate" 
+                                            className="form-control"
                                             name="startDate"
-                                            valid={errors.startDate === ''}
-                                            invalid={errors.startDate !== ''}
+                                            model=".startDate"
                                             onBlur={this.handleBlur('startDate')}
                                             value={this.state.newStaff.startDate}
-                                            onChange={this.handleInputChange} />
-                                            <FormFeedback>{errors.startDate}</FormFeedback>
+                                            onChange={this.handleInputChange}
+                                            validators={{required}} />
+                                        <Errors
+                                            model=".startDate"
+                                            show={(field) => field.touched && !field.focus}
+                                            messages={{
+                                            required: "Yêu cầu nhập."
+                                            }}
+                                            className="text-danger"
+                                        />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -270,7 +299,7 @@ class Search extends Component {
                                     onClick={(input) => this.props.addStaff(this.state.newStaff)}>
                                         Thêm
                                 </Button>
-                            </Form>
+                            </LocalForm>
                         </ModalBody>
                     </Modal>
                     <div className='col-12 col-md-12 row'>
