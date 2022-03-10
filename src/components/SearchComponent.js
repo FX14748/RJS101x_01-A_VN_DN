@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, FormFeedback, Input, Col, Modal, ModalBody, ModalHeader, Label, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Col, Modal, ModalBody, ModalHeader, Label, Row } from 'reactstrap';
 import { Control, LocalForm, Errors} from 'react-redux-form';
 
 const required = (value) => value && value.length > 0 ;
 const maxlength = (len) => (value) => !(value) || (value.length <= len);
-const isNumber = (value) => !(value) ||!isNaN(Number(value));
 
 class Search extends Component {
     constructor(props) {
@@ -13,31 +12,12 @@ class Search extends Component {
         this.state = {
             searchInput: '',
             isModalOpen: false,
-            newStaff:{
-                id: this.props.staffs.length,
-                name: '',
-                doB: '',
-                salaryScale:1,
-                startDate: '',
-                department: "Sale",
-                annualLeave: 0,
-                overTime: 0,
-                image: "/assets/images/alberto.png"},
-            touched: {
-                name: false,
-                doB: false,
-                salaryScale:false,
-                startDate: false,
-                annualLeave: false,
-                overTime: false
-            },
+            newStaff:{},
             clickedSubmit: false
         }
 
         this.toggleModal = this.toggleModal.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
     }
 
     toggleModal() {
@@ -45,54 +25,7 @@ class Search extends Component {
           isModalOpen: !this.state.isModalOpen
         });
     }
-    // display/hide modal
-
-    handleInputChange(event) {
-        const target = event.target;
-        const value =  target.value;
-        const names = target.name;
-        //console.log(value);
-        //console.log(names);
-        this.setState({
-            newStaff: {...this.state.newStaff,  [names]: value }
-        });
-    }
-    //update input value from mode => state
-
-    handleBlur = (field) => (evt) => {
-        this.setState({
-            touched: { ...this.state.touched, [field]: true }
-        });
-    }
-    //check if user click on input field or not
-
-    validate(name, doB, startDate) {
-        const errors = {
-            name: '',
-            doB:'',
-            startDate:''
-        };
-
-        if (name ==="" && this.state.clickedSubmit)
-            {errors.name="Vui lòng nhập tên"}
-        else if (this.state.touched.name && name.length < 3)
-            {errors.name = 'Yêu cầu lớn hơn 3 ký tự'}
-        else if (this.state.touched.name && name.length > 30)
-            {errors.name = 'Yêu cầu ít hơn 30 ký tự'};
-
-        if (doB==='' && this.state.clickedSubmit)
-            {errors.doB="Vui lòng nhập ngày sinh"};
-            //console.log(errors.doB)
-
-        if (startDate==='' && this.state.clickedSubmit)
-            {errors.startDate="Vui lòng nhập ngày bắt đầu"};
-            //console.log(errors.startDate)
-
-
-        return errors;
-    }
-    //validate dat from modal's input
-   
+    // display/hide modal   
     
     isChange = (event) => {
         console.log(event.target.value);
@@ -100,47 +33,39 @@ class Search extends Component {
         //lưu input value trong ô search vào state danh cho o Search
     }
 
-    handleSubmit(event) {
+    handleSubmit(values) {
             this.setState({
                 clickedSubmit:true,
         })
-
+        this.toggleModal();
+        console.log(values)
         if (this.state.newStaff.name!== '' && this.state.newStaff.doB !== '' && this.state.newStaff.startDate !== '')
         {this.setState({isModalOpen: !this.state.isModalOpen})};
     ;
-        // hide modal
         
-        //event.preventDefault();
-        
-        console.log(this.state.newStaff);
-        /*const staffData = this.state.newStaff;
         const newStaff= {
-            name: staffData.name,
-            doB: staffData.doB,
-            salaryScale: staffData.salaryScale,
-            startDate: staffData.startDate,
-            department: {name:staffData.department},
-            annualLeave: staffData.annualLeave,
-            overTime: staffData.overTime,
+            name: values.name,
+            doB: values.doB,
+            salaryScale: values.salaryScale,
+            startDate: values.startDate,
+            department: {name:values.department},
+            annualLeave: values.annualLeave,
+            overTime: values.overTime,
             image: '/assets/images/alberto.png',
         };
         console.log(newStaff);
-        return newStaff; */
+        this.setState({newStaff:newStaff})
         //creat new object of staff info
 }
-    
-
-    
-    render() {
-        const errors = this.validate(this.state.newStaff.name, this.state.newStaff.doB, this.state.newStaff.startDate);
-        
+       
+    render() {       
         return (
             <div className="container">
                 <div className='row'>
                     <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                         <ModalHeader toggle={this.toggleModal}>Thêm Nhân Viên</ModalHeader>
                         <ModalBody>
-                            <LocalForm onSubmit={this.handleSubmit}>
+                            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                                 <FormGroup row>
                                     <Label 
                                         htmlFor="name"
@@ -153,12 +78,7 @@ class Search extends Component {
                                             model=".name"
                                             id="name" 
                                             name="name"
-                                            className="form-control"
-                                            value={this.state.newStaff.name}
-                                            valid={errors.name === ''}
-                                            invalid={errors.name !== ''}
-                                            onBlur={this.handleBlur('name')}
-                                            onChange={this.handleInputChange}
+                                            className="form-control"                        
                                             validators={{ required, maxLength: maxlength(15) }}/>
                                         <Errors
                                             model=".name"
@@ -184,9 +104,6 @@ class Search extends Component {
                                             model=".doB"
                                             id="doB" 
                                             name="doB"
-                                            value={this.state.newStaff.doB}
-                                            onBlur={this.handleBlur('doB')}
-                                            onChange={this.handleInputChange}
                                             validators={{required}} />
                                         <Errors
                                             model=".doB"
@@ -206,14 +123,12 @@ class Search extends Component {
                                     </Label>
                                     <Col md={8}>
                                         <Control 
+                                            
                                             type="date" 
                                             id="startDate" 
                                             className="form-control"
                                             name="startDate"
                                             model=".startDate"
-                                            onBlur={this.handleBlur('startDate')}
-                                            value={this.state.newStaff.startDate}
-                                            onChange={this.handleInputChange}
                                             validators={{required}} />
                                         <Errors
                                             model=".startDate"
@@ -232,16 +147,26 @@ class Search extends Component {
                                             Phòng Ban
                                     </Label>
                                     <Col md={8}>
-                                        <Input type="select" 
+                                        <Control.select
+                                                model=".department"
                                                 name="department"
-                                                value={this.state.newStaff.department}
-                                                onChange={this.handleInputChange}>
+                                                className="form-control"
+                                                validators={{required}}>
+                                                    
                                             <option value="Sale">Sale</option>
                                             <option value="Hr">Hr</option>
                                             <option value="Marketing">Marketing</option>
                                             <option value="IT">IT</option>
                                             <option value="Finance">Finance</option>
-                                        </Input>
+                                        </Control.select>
+                                        <Errors
+                                            model=".department"
+                                            show={(field) => field.touched && !field.focus}
+                                            messages={{
+                                            required: "Yêu cầu nhập."
+                                            }}
+                                            className="text-danger"
+                                        />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -251,13 +176,22 @@ class Search extends Component {
                                             Hệ Số Lương
                                     </Label>
                                     <Col md={8}>
-                                        <Input 
+                                        <Control 
                                             type="number" 
                                             id="salaryScale" 
                                             name="salaryScale"
+                                            model=".salaryScale"
+                                            className="form-control"
                                             placeholder="1.0 -> 3.0 "
-                                            value={this.state.newStaff.salaryScale}
-                                            onChange={this.handleInputChange} />
+                                            validators={{required}} />
+                                            <Errors
+                                            model=".salaryScale"
+                                            show={(field) => field.touched && !field.focus}
+                                            messages={{
+                                            required: "Yêu cầu nhập."
+                                            }}
+                                            className="text-danger"
+                                        />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -267,13 +201,23 @@ class Search extends Component {
                                             Số Ngày Nghỉ còn lại
                                     </Label>
                                     <Col md={8}>
-                                        <Input 
+                                        <Control 
                                             type="number" 
                                             id="annualLeave" 
                                             name="annualLeave"
+                                            className="form-control"
+                                            model=".annualLeave"
                                             placeholder="0"
-                                            value={this.state.newStaff.annualLeave}
-                                            onChange={this.handleInputChange} />
+                                            onChange={this.handleInputChange} 
+                                            validators={{required}}/>
+                                            <Errors
+                                            model=".annualLeave"
+                                            show={(field) => field.touched && !field.focus}
+                                            messages={{
+                                            required: "Yêu cầu nhập."
+                                            }}
+                                            className="text-danger"
+                                        />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -283,13 +227,23 @@ class Search extends Component {
                                             Số ngày đã làm thêm
                                     </Label>
                                     <Col md={8}>
-                                        <Input 
+                                        <Control 
                                             type="number" 
                                             id="overTime" 
                                             name="overTime"
+                                            model=".overTime"
                                             placeholder="0"
-                                            value={this.state.newStaff.overTime}
-                                            onChange={this.handleInputChange} />
+                                            className="form-control"
+                                            onChange={this.handleInputChange} 
+                                            validators={{required}}/>
+                                            <Errors
+                                            model=".overTime"
+                                            show={(field) => field.touched && !field.focus}
+                                            messages={{
+                                            required: "Yêu cầu nhập."
+                                            }}
+                                            className="text-danger"
+                                        />
                                     </Col>
                                 </FormGroup>
                                 <Button 

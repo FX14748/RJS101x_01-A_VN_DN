@@ -32,15 +32,17 @@ class Main extends Component {
 
 
 getTextSearch = (text) => {
-    this.setState({
+    if(text !== '')
+    {this.setState({
       searchInput: text,
     });
 
      //console.log(' Dữ liệu nhân được là:' + this.state.searchText)
+};
 }
 
 addNewStaff = (input) => {
-  if(input.name !=='' & input.doB !=='' & input.startDate !=='')
+  if(input.name !== undefined & input.doB !==undefined & input.startDate !==undefined)
     {
       const newStaff= {
         id:this.state.staffs.length,
@@ -48,7 +50,7 @@ addNewStaff = (input) => {
         doB: input.doB,
         salaryScale: input.salaryScale,
         startDate: input.startDate,
-        department: {name:input.department},
+        department: input.department,
         annualLeave: input.annualLeave,
         overTime: input.overTime,
         image: '/assets/images/alberto.png',
