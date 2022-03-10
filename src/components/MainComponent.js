@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import DepartmentDetail from './DepartmentComponent';
 import Salary from './SalaryComponents';
 import Search from "./SearchComponent";
-
+import { addStaff } from '../redux/ActionCreators';
 
 const mapStateToProps= state => {
   return {
@@ -17,6 +17,12 @@ const mapStateToProps= state => {
     departments:state.departments
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  
+  addStaff: (values) => dispatch(addStaff(values))
+
+});
 
 class Main extends Component {
 
@@ -26,7 +32,6 @@ class Main extends Component {
     this.state ={
       searchInput: '',
       test:'',
-      staffs:this.props.staffs
     };
   }
 
@@ -41,11 +46,11 @@ getTextSearch = (text) => {
 };
 }
 
-addNewStaff = (input) => {
+/*addNewStaff = (input) => {
   if(input.name !== undefined & input.doB !==undefined & input.startDate !==undefined)
     {
       const newStaff= {
-        id:this.state.staffs.length,
+        id:this.props.staffs.length,
         name: input.name,
         doB: input.doB,
         salaryScale: input.salaryScale,
@@ -55,19 +60,19 @@ addNewStaff = (input) => {
         overTime: input.overTime,
         image: '/assets/images/alberto.png',
       };
-      console.log(newStaff)
+      console.log(newStaff)v
       this.setState({
           test: input,
-          staffs: [...this.state.staffs, ...[newStaff]]
+          staffs: [...this.props.staffs, ...[newStaff]]
       })
-      console.log(this.state.staffs)
+      console.log(this.props.staffs)
     }
-}
+} */
 
 
 render () {
   var results = [];
-  this.state.staffs.map((item) => {
+  this.props.staffs.map((item) => {
       if ( item.name.toLowerCase().includes(this.state.searchInput.toLowerCase())) {
           results.push(item);
       }
@@ -78,7 +83,7 @@ render () {
       return (
         <StaffDetails
           staff={
-            this.state.staffs.filter(
+            this.props.staffs.filter(
               (staff) => staff.id === parseInt(match.params.ID,10))[0]}
         />
       )
@@ -90,7 +95,7 @@ render () {
           <Header/>
           <Search 
                 searchedStaff = {(text) => this.getTextSearch(text)}
-                addStaff= {(input)=>this.addNewStaff(input)}
+                addStaff= {this.props.addStaff}
                 staffs={results}
             />
             <Switch>
@@ -107,4 +112,4 @@ render () {
   }
 
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

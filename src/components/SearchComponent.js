@@ -13,7 +13,6 @@ class Search extends Component {
             searchInput: '',
             isModalOpen: false,
             newStaff:{},
-            clickedSubmit: false
         }
 
         this.toggleModal = this.toggleModal.bind(this);
@@ -34,27 +33,12 @@ class Search extends Component {
     }
 
     handleSubmit(values) {
-            this.setState({
-                clickedSubmit:true,
-        })
-        this.toggleModal();
+            
+        //this.toggleModal();
         console.log(values)
         if (this.state.newStaff.name!== '' && this.state.newStaff.doB !== '' && this.state.newStaff.startDate !== '')
-        {this.setState({isModalOpen: !this.state.isModalOpen})};
-    ;
-        
-        const newStaff= {
-            name: values.name,
-            doB: values.doB,
-            salaryScale: values.salaryScale,
-            startDate: values.startDate,
-            department: {name:values.department},
-            annualLeave: values.annualLeave,
-            overTime: values.overTime,
-            image: '/assets/images/alberto.png',
-        };
-        console.log(newStaff);
-        this.setState({newStaff:newStaff})
+        {this.setState({isModalOpen: !this.state.isModalOpen})};       
+        this.props.addStaff(values)
         //creat new object of staff info
 }
        
@@ -250,7 +234,7 @@ class Search extends Component {
                                     type="submit" 
                                     value="submit" 
                                     color="primary"
-                                    onClick={(input) => this.props.addStaff(this.state.newStaff)}>
+                                    >
                                         Thêm
                                 </Button>
                             </LocalForm>
