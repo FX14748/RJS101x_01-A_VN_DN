@@ -13,3 +13,8 @@ export const addStaff = (values) => ({
         image: '/assets/images/alberto.png',
     }
 });
+/*
+export const searchStaff = (values) => ({
+    type: ActionTypes.SEARCH_STAFF,
+    payload: values
+}); */

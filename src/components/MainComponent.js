@@ -75,6 +75,7 @@ render () {
   this.props.staffs.map((item) => {
       if ( item.name.toLowerCase().includes(this.state.searchInput.toLowerCase())) {
           results.push(item);
+          console.log(this.state.searchInput)
       }
   })
   //console.log(results);
